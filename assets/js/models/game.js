@@ -1,0 +1,49 @@
+class Game {
+    constructor(canvasId) {
+        console.debug('game called properly')
+
+        this.canvas = document.getElementById(canvasId)
+        this.canvas.width = CANVAS_W
+        this.canvas.height = CANVAS_H
+        this.ctx = this.canvas.getContext('2d')
+
+        this.spaceship = new Spaceship(this.ctx, 292, 700)
+
+        this.fps = FPS
+
+        this.drawIntervalId = undefined
+    }
+
+    start() {
+        console.debug('game start')
+
+        if(!this.drawIntervalId) {
+
+            this.setupListeners()
+
+            this.drawIntervalId = setInterval(() => {
+                this.clear()
+                this.move()
+                this.draw()
+            }, this.fps)
+        }
+    }
+
+    setupListeners() {
+        addEventListener('keydown', (event) => this.spaceship.onKeyEvent(event))
+        addEventListener('keyup', (event) => this.spaceship.onKeyEvent(event))
+    }
+
+    clear() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    }
+
+    move() {
+        this.spaceship.move()
+
+    }
+
+    draw() {
+        this.spaceship.draw()
+    }
+}
