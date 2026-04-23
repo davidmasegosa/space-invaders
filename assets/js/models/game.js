@@ -7,7 +7,10 @@ class Game {
         this.canvas.height = CANVAS_H
         this.ctx = this.canvas.getContext('2d')
 
-        this.spaceship = new Spaceship(this.ctx, 292, 700)
+        this.scorePanel = new ScorePanel(this.ctx)
+        this.lifesPanel = new LifesPanel(this.ctx)
+
+        this.spaceship = new Spaceship(this.ctx, (CANVAS_W - SPACESHIP_W) / 2, CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - SPACESHIP_GROUND_SEPARATION)
 
         this.fps = FPS
 
@@ -45,6 +48,8 @@ class Game {
     }
 
     draw() {
+        this.scorePanel.draw()
+        this.lifesPanel.draw()
         this.spaceship.draw()
     }
 
