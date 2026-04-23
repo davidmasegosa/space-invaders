@@ -3,14 +3,6 @@ const FPS = 1000 / 60;
 const CANVAS_W = 600;
 const CANVAS_H = 800;
 
-const KEY_RIGHT = 39
-const KEY_LEFT = 37
-
-const SPACESHIP_W = 26
-const SPACESHIP_H = 16
-const SPACESHIP_VX = 5
-const SPACESHIP_GROUND_SEPARATION = 15
-
 const SCORE_PANEL_W = 600
 const SCORE_PANEL_H = 84
 const SCORE_PANEL_TEXT_W = 70
@@ -22,3 +14,15 @@ const SCORE_PANEL_STROKE_WIDTH = 2
 const LIFES_PANEL_W = 600
 const LIFES_PANEL_H = 60
 const LIFES_PANEL_STROKE_WIDTH = 2
+
+const DEFAULT_SEPARATION = 15
+
+const KEY_RIGHT = 39
+const KEY_LEFT = 37
+
+const SPACESHIP_W = 26
+const SPACESHIP_H = 16
+const SPACESHIP_VX = 5
+
+const ALIEN_W = 16
+const ALIEN_H = 16

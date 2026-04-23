@@ -10,7 +10,9 @@ class Game {
         this.scorePanel = new ScorePanel(this.ctx)
         this.lifesPanel = new LifesPanel(this.ctx)
 
-        this.spaceship = new Spaceship(this.ctx, (CANVAS_W - SPACESHIP_W) / 2, CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - SPACESHIP_GROUND_SEPARATION)
+        this.spaceship = new Spaceship(this.ctx, (CANVAS_W - SPACESHIP_W) / 2, CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - DEFAULT_SEPARATION)
+
+        this.alien = new Alien(this.ctx, DEFAULT_SEPARATION, SCORE_PANEL_H + DEFAULT_SEPARATION)
 
         this.fps = FPS
 
@@ -51,15 +53,16 @@ class Game {
         this.scorePanel.draw()
         this.lifesPanel.draw()
         this.spaceship.draw()
+        this.alien.draw()
     }
 
     checkBounds() {
-        if(this.spaceship.x < 0) {
-            this.spaceship.x = 0
+        if(this.spaceship.x < DEFAULT_SEPARATION) {
+            this.spaceship.x = DEFAULT_SEPARATION
         }
 
-        if(this.spaceship.x + this.spaceship.w > this.canvas.width) {
-            this.spaceship.x = this.canvas.width - this.spaceship.w
+        if(this.spaceship.x + this.spaceship.w > this.canvas.width - DEFAULT_SEPARATION) {
+            this.spaceship.x = this.canvas.width - this.spaceship.w - DEFAULT_SEPARATION
         }
     }
 }
