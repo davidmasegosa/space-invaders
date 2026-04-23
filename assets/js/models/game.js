@@ -41,9 +41,20 @@ class Game {
     move() {
         this.spaceship.move()
 
+        this.checkBounds()
     }
 
     draw() {
         this.spaceship.draw()
+    }
+
+    checkBounds() {
+        if(this.spaceship.x < 0) {
+            this.spaceship.x = 0
+        }
+
+        if(this.spaceship.x + this.spaceship.w > this.canvas.width) {
+            this.spaceship.x = this.canvas.width - this.spaceship.w
+        }
     }
 }
