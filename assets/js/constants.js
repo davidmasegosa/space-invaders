@@ -26,3 +26,12 @@ const SPACESHIP_VX = 5
 
 const ALIEN_W = 16
 const ALIEN_H = 16
+const ALIEN_SEPARATION = 18.5
+
+const ALIEN_BIG_W = 22
+const ALIEN_BIG_H = 16
+const ALIEN_BIG_SEPARATION = 12
+
+const ALIEN_HUGE_W = 24
+const ALIEN_HUGE_H = 16
+const ALIEN_HUGE_SEPARATION = 10

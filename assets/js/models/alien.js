@@ -1,6 +1,6 @@
 class Alien {
 
-    constructor(ctx, x, y) {
+    constructor(ctx, x, y, type = 'default') {
         this.ctx = ctx
 
         this.x = x
@@ -10,7 +10,19 @@ class Alien {
         this.h = ALIEN_H
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/sprite-alien.png'
+
+        if(type === 'bigAlien') {
+            this.sprite.src = '/assets/images/sprites/alien/sprite-big-alien.png'
+        }
+
+        else if(type === 'hugeAlien') {
+            this.sprite.src = '/assets/images/sprites/alien/sprite-huge-alien.png'
+        }
+
+        else {
+            this.sprite.src = '/assets/images/sprites/alien/sprite-alien.png'
+        }
+
         this.sprite.onload = () => {
             this.sprite.isReady = true
         }
