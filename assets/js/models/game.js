@@ -12,9 +12,7 @@ class Game {
 
         this.spaceship = new Spaceship(this.ctx, (CANVAS_W - SPACESHIP_W) / 2, CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - DEFAULT_SEPARATION)
 
-        this.aliens = []
-
-        this.createAliens()
+        this.alienHorde = new AlienHorde(this.ctx)
 
         this.fps = FPS
 
@@ -55,10 +53,7 @@ class Game {
         this.scorePanel.draw()
         this.lifesPanel.draw()
         this.spaceship.draw()
-
-        this.aliens.forEach(alien => {
-            alien.draw()
-        })
+        this.alienHorde.draw()
     }
 
     checkBounds() {
@@ -68,43 +63,6 @@ class Game {
 
         if(this.spaceship.x + this.spaceship.w > this.canvas.width - DEFAULT_SEPARATION) {
             this.spaceship.x = this.canvas.width - this.spaceship.w - DEFAULT_SEPARATION
-        }
-    }
-
-    createAliens() {
-        let alienType
-        let alienW
-        let alienH
-        let alienSeparation
-
-        for(let i = 0; i<11; i++) {
-            for(let j = 0; j<5; j++) {
-                if(j === 0) {
-                    alienType = 'default'
-                    alienW = ALIEN_W
-                    alienH = ALIEN_H
-                    alienSeparation = ALIEN_SEPARATION
-                }
-                if(j === 1) {
-                    alienType = 'bigAlien'
-                    alienW = ALIEN_BIG_W
-                    alienH = ALIEN_BIG_H
-                    alienSeparation = ALIEN_BIG_SEPARATION
-                }
-
-                if( j > 1) {
-                    alienType = 'hugeAlien'
-                    alienW = ALIEN_HUGE_W
-                    alienH = ALIEN_HUGE_H
-                    alienSeparation = ALIEN_HUGE_SEPARATION
-                }
-
-                this.aliens.push(new Alien(
-                    this.ctx,
-                    DEFAULT_SEPARATION + i*(alienSeparation + alienW),
-                    SCORE_PANEL_H + DEFAULT_SEPARATION + j*(DEFAULT_SEPARATION + alienH),
-                    alienType))
-            }
         }
     }
 }

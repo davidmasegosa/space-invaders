@@ -4,13 +4,13 @@ class ScorePanel {
         this.ctx = ctx
 
         this.textSprite = new Image()
-        this.textSprite.src = '/assets/images/sprites/score/sprite-score-text.png'
+        this.textSprite.src = '/assets/images/sprites/panels/score/sprite-score-text.png'
         this.textSprite.onload = () => {
             this.textSprite.isReady = true
         }
 
         this.numbersSprite = new Image()
-        this.numbersSprite.src = '/assets/images/sprites/score/sprite-score-number-0.png'
+        this.numbersSprite.src = '/assets/images/sprites/panels/score/sprite-score-number-0.png'
         this.numbersSprite.onload = () => {
             this.numbersSprite.isReady = true
         }
