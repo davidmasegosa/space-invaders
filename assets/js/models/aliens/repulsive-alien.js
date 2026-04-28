@@ -44,4 +44,8 @@ class RepulsiveAlien {
             this.y)
         )
     }
+    
+    destroyBullet(bullet) {
+        this.bullets = this.bullets.filter(b => b !== bullet)
+    }
 }

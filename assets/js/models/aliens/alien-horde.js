@@ -14,8 +14,7 @@ class AlienHorde {
     }
 
     createHorde() {
-
-
+        
         const hordeDefinition = [
             ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
             ['H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'],
@@ -23,7 +22,6 @@ class AlienHorde {
             ['U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'],
             ['U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U']
         ]
-
 
         for (let i = 0; i < hordeDefinition.length; i++) {
             let row = hordeDefinition[i]
