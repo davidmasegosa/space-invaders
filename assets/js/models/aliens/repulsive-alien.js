@@ -10,7 +10,7 @@ class RepulsiveAlien {
         this.h = ALIEN_H
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/aliens/sprite-huge-alien.png'
+        this.sprite.src = '/assets/images/sprites/aliens/sprite-repulsive-alien.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true
@@ -28,5 +28,10 @@ class RepulsiveAlien {
                 y
             )
         }
+    }
+
+    updatePosition (vx, vy) {
+        this.x += vx
+        this.y += vy
     }
 }

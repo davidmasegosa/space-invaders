@@ -1,7 +1,5 @@
 class Game {
     constructor(canvasId) {
-        console.debug('game called properly')
-
         this.canvas = document.getElementById(canvasId)
         this.canvas.width = CANVAS_W
         this.canvas.height = CANVAS_H
@@ -10,7 +8,11 @@ class Game {
         this.scorePanel = new ScorePanel(this.ctx)
         this.lifesPanel = new LifesPanel(this.ctx)
 
-        this.spaceship = new Spaceship(this.ctx, (CANVAS_W - SPACESHIP_W) / 2, CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - DEFAULT_SEPARATION)
+        this.spaceship = new Spaceship(
+            this.ctx,
+            (CANVAS_W - SPACESHIP_W) / 2,
+            CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - DEFAULT_SEPARATION
+        )
 
         this.alienHorde = new AlienHorde(this.ctx)
 
@@ -20,7 +22,7 @@ class Game {
     }
 
     start() {
-        console.debug('game start')
+        console.debug('Game started')
 
         if(!this.drawIntervalId) {
 
@@ -29,6 +31,7 @@ class Game {
             this.drawIntervalId = setInterval(() => {
                 this.clear()
                 this.move()
+                this.checkBounds()
                 this.draw()
             }, this.fps)
         }
@@ -45,8 +48,7 @@ class Game {
 
     move() {
         this.spaceship.move()
-
-        this.checkBounds()
+        this.alienHorde.move()
     }
 
     draw() {
@@ -57,6 +59,7 @@ class Game {
     }
 
     checkBounds() {
+        /* Spaceship */
         if(this.spaceship.x < DEFAULT_SEPARATION) {
             this.spaceship.x = DEFAULT_SEPARATION
         }
@@ -64,5 +67,8 @@ class Game {
         if(this.spaceship.x + this.spaceship.w > this.canvas.width - DEFAULT_SEPARATION) {
             this.spaceship.x = this.canvas.width - this.spaceship.w - DEFAULT_SEPARATION
         }
+
+        /* Horde */
+        this.alienHorde.checkBounds()
     }
 }

@@ -10,7 +10,7 @@ class HorribleAlien {
         this.h = ALIEN_H
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/aliens/sprite-big-alien.png'
+        this.sprite.src = '/assets/images/sprites/aliens/sprite-horrible-alien.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true
@@ -28,5 +28,10 @@ class HorribleAlien {
                 y
             )
         }
+    }
+
+    updatePosition (vx, vy) {
+        this.x += vx
+        this.y += vy
     }
 }
