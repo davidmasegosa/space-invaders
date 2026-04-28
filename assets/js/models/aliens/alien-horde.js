@@ -64,9 +64,7 @@ class AlienHorde {
     }
 
     draw () {
-
-        console.log('ALIEN HORDE DRAW CALLED')
-
+  
         for (let i = 0; i < this.horde.length; i++) {
         
             for (let j = 0; j < this.horde[i].length; j++) {

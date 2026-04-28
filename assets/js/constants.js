@@ -19,10 +19,14 @@ const DEFAULT_SEPARATION = 15
 
 const KEY_RIGHT = 39
 const KEY_LEFT = 37
+const KEY_SPACE = 32
 
 const SPACESHIP_W = 26
 const SPACESHIP_H = 16
 const SPACESHIP_VX = 5
+
+const BULLET_W = 6
+const BULLET_H = 12
 
 const ALIEN_W = 16
 const ALIEN_H = 16

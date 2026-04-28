@@ -48,6 +48,7 @@ class Game {
 
     move() {
         this.spaceship.move()
+        this.spaceship.bullets.forEach(bullet => bullet.move())
         this.alienHorde.move()
     }
 
@@ -55,6 +56,7 @@ class Game {
         this.scorePanel.draw()
         this.lifesPanel.draw()
         this.spaceship.draw()
+        this.spaceship.bullets.forEach(bullet => bullet.draw())
         this.alienHorde.draw()
     }
 

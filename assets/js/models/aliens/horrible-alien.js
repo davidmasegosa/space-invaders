@@ -20,8 +20,6 @@ class HorribleAlien {
     draw (x, y) {
         if( this.sprite.isReady ) {
 
-            console.debug('alien sprite is ready')
-
             this.ctx.drawImage(
                 this.sprite,
                 x,

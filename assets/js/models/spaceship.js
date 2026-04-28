@@ -16,6 +16,10 @@ class Spaceship {
         this.sprite.onload = () => {
             this.sprite.isReady = true
         }
+
+        this.bulletTimeoutActive = false
+
+        this.bullets = []
     }
 
     onKeyEvent(event) {
@@ -36,6 +40,17 @@ class Spaceship {
                     this.vx = 0
                 }
                 break
+            case KEY_SPACE:
+                if(isPressed && !this.bulletTimeoutActive) {
+                    this.bulletTimeoutActive = true
+                    
+                    window.setTimeout(() => {
+                        this.bulletTimeoutActive = false
+                    }, 500)
+                    
+                    this.shoot()
+                }
+                break
         }
     }
 
@@ -54,5 +69,13 @@ class Spaceship {
                 this.y
             )
         }
+    }
+
+    shoot() {
+        this.bullets.push(new Bullet(
+            this.ctx,
+            this.x + this.w / 2 - BULLET_W / 2,
+            this.y)
+        )
     }
 }
