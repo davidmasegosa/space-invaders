@@ -8,6 +8,7 @@ class UglyAlien {
 
         this.w = ALIEN_W
         this.h = ALIEN_H
+        this.points = ALIEN_POINTS
 
         this.sprite = new Image()
         this.sprite.src = '/assets/images/sprites/aliens/sprite-ugly-alien.png'

@@ -16,6 +16,8 @@ class Game {
 
         this.alienHorde = new AlienHorde(this.ctx)
 
+        this.score = 0
+
         this.fps = FPS
 
         this.drawIntervalId = undefined
@@ -54,7 +56,7 @@ class Game {
     }
 
     draw() {
-        this.scorePanel.draw()
+        this.scorePanel.draw(this.score)
         this.lifesPanel.draw()
         this.spaceship.draw()
         this.spaceship.bullets.forEach(bullet => bullet.draw())
@@ -83,6 +85,7 @@ class Game {
                         if( this.checkCollision(bullet, alien)) {
                             console.debug('Collision detected')
                             this.alienHorde.killAlien(alien)
+                            this.score += alien.points
                             this.spaceship.destroyBullet(bullet)
                         }
                     })
