@@ -9,6 +9,8 @@ class AlienHorde {
         this.vy = 0
 
         this.moveDirection = 'right'
+
+        this.attack()
     }
 
     createHorde() {
@@ -158,5 +160,24 @@ class AlienHorde {
                 return alien !== al
             })
         })
+    }
+
+    attack() {
+        window.setInterval(() => {
+            this.shoot()
+        }, 3000)
+    }
+
+    shoot() {
+        const randomRowIndex = Math.floor(Math.random() * this.horde.length)
+        const randomRow = this.horde[randomRowIndex]
+        const randomAlienIndex = Math.floor(Math.random() * randomRow.length)
+        const randomAlien = randomRow[randomAlienIndex]
+
+        console.log('random alien')
+
+        console.log(randomAlien)
+
+        randomAlien.shoot()
     }
 }

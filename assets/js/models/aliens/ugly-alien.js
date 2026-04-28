@@ -10,6 +10,8 @@ class UglyAlien {
         this.h = ALIEN_H
         this.points = ALIEN_POINTS
 
+        this.bullets = []
+
         this.sprite = new Image()
         this.sprite.src = '/assets/images/sprites/aliens/sprite-ugly-alien.png'
 
@@ -32,5 +34,13 @@ class UglyAlien {
     updatePosition (vx, vy) {
         this.x += vx
         this.y += vy
+    }
+
+    shoot() {
+        this.bullets.push(new AlienBullet(
+            this.ctx,
+            this.x + this.w / 2 - BULLET_W / 2,
+            this.y)
+        )
     }
 }

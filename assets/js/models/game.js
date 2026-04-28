@@ -5,6 +5,8 @@ class Game {
         this.canvas.height = CANVAS_H
         this.ctx = this.canvas.getContext('2d')
 
+        this.screen = 'welcome'
+
         this.scorePanel = new ScorePanel(this.ctx)
         this.lifesPanel = new LifesPanel(this.ctx)
 
@@ -24,6 +26,30 @@ class Game {
     }
 
     start() {
+        this.drawWelcomeScreen()
+        addEventListener('keydown', (event) => this.onKeyEvent(event))
+    }
+
+    drawWelcomeScreen() {
+        this.welcomeSprite = new Image()
+        this.welcomeSprite.src = '/assets/images/sprites/screens/sprite-welcome.png'
+
+        this.welcomeSprite.onload = () => {
+            this.ctx.drawImage(
+                this.welcomeSprite, 
+                (CANVAS_W - WELCOME_SCREEN_W) / 2,
+                (CANVAS_H - WELCOME_SCREEN_H) / 2
+            )
+        }
+    }
+
+    onKeyEvent(event) {
+        if(this.screen === 'welcome' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
+            this.startPlaying()
+        }
+    }
+
+    startPlaying() {
         console.debug('Game started')
 
         if(!this.drawIntervalId) {
@@ -53,6 +79,11 @@ class Game {
         this.spaceship.move()
         this.spaceship.bullets.forEach(bullet => bullet.move())
         this.alienHorde.move()
+        this.alienHorde.horde.forEach(row => {
+            row.forEach(alien => {
+                alien.bullets.forEach(bullet => bullet.move())
+            })
+        })
     }
 
     draw() {
@@ -61,6 +92,11 @@ class Game {
         this.spaceship.draw()
         this.spaceship.bullets.forEach(bullet => bullet.draw())
         this.alienHorde.draw()
+        this.alienHorde.horde.forEach(row => {
+            row.forEach(alien => {
+                alien.bullets.forEach(bullet => bullet.draw())
+            })
+        })
     }
 
     checkBounds() {

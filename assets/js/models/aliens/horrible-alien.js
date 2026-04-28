@@ -9,6 +9,8 @@ class HorribleAlien {
         this.w = ALIEN_W
         this.h = ALIEN_H
 
+        this.bullets = []
+
         this.points = ALIEN_HORRIBLE_POINTS
 
         this.sprite = new Image()
@@ -33,5 +35,13 @@ class HorribleAlien {
     updatePosition (vx, vy) {
         this.x += vx
         this.y += vy
+    }
+
+    shoot() {
+        this.bullets.push(new AlienBullet(
+            this.ctx,
+            this.x + this.w / 2 - BULLET_W / 2,
+            this.y)
+        )
     }
 }
