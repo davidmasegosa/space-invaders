@@ -32,6 +32,7 @@ class Game {
                 this.clear()
                 this.move()
                 this.checkBounds()
+                this.checkCollisions() 
                 this.draw()
             }, this.fps)
         }
@@ -72,5 +73,31 @@ class Game {
 
         /* Horde */
         this.alienHorde.checkBounds()
+    }
+
+    checkCollisions() {
+        if(this.spaceship.bullets.length > 0 && this.alienHorde.horde.length > 0) {
+            this.spaceship.bullets.forEach(bullet => {
+                this.alienHorde.horde.forEach(row => {
+                    row.forEach(alien => {
+                        if( this.checkCollision(bullet, alien)) {
+                            console.debug('Collision detected')
+                            this.alienHorde.killAlien(alien)
+                            this.spaceship.destroyBullet(bullet)
+                        }
+                    })
+                })
+            })
+        }
+    }
+
+    checkCollision(bullet, alien) {
+        if( (bullet.x >= alien.x && bullet.x <= alien.x + alien.w) &&
+            (bullet.y + BULLET_H <= alien.y + ALIEN_H && bullet.y >= alien.y) )
+        {
+
+            console.debug('Collision detected!!!')
+            return true
+        }
     }
 }

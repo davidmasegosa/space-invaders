@@ -13,7 +13,6 @@ class AlienHorde {
 
     createHorde() {
 
-        console.log('create horde function called')
 
         const hordeDefinition = [
             ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
@@ -23,18 +22,15 @@ class AlienHorde {
             ['U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U']
         ]
 
-        console.log( hordeDefinition.length )
 
         for (let i = 0; i < hordeDefinition.length; i++) {
             let row = hordeDefinition[i]
             this.horde[i] = new Array()
 
-            console.log(row.length)
 
             for (let j = 0; j < row.length; j++) {
                 let alien = hordeDefinition[i][j]
 
-                console.log(alien)
 
                 if(alien === 'U') {
                     this.horde[i][j] = new UglyAlien(
@@ -70,6 +66,7 @@ class AlienHorde {
             for (let j = 0; j < this.horde[i].length; j++) {
                 let alien = this.horde[i][j]
                 alien.draw(alien.x, alien.y)
+                
             }
         }
 
@@ -77,7 +74,6 @@ class AlienHorde {
 
     move() {
 
-        console.log(this.moveDirection)
 
         if(this.moveDirection === 'right') {
             this.moveRight()
@@ -129,7 +125,6 @@ class AlienHorde {
 
                     if(alien.x + ALIEN_W > CANVAS_W - DEFAULT_SEPARATION) {
                         this.moveDirection = 'down'
-                        console.log('AN ALIEN IS ON THE BOUNDS!!!!!')
                         window.setTimeout(() => {
                             this.stopMovingDown('left')
                         }, 3000)
@@ -144,7 +139,6 @@ class AlienHorde {
 
                     if(alien.x < DEFAULT_SEPARATION) {
                         this.moveDirection = 'down'
-                        console.log('AN ALIEN IS ON THE BOUNDS!!!!!')
                         window.setTimeout(() => {
                             this.stopMovingDown('right')
                         }, 3000)
@@ -152,5 +146,17 @@ class AlienHorde {
                 })
             })
         }
+    } 
+
+    killAlien(alien) { 
+        console.log(this.horde)
+
+        const aliensHorde = this.horde
+
+        aliensHorde.forEach(function(row, i) {
+            aliensHorde[i] = row.filter(function(al, j){
+                return alien !== al
+            })
+        })
     }
 }

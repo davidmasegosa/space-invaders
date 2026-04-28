@@ -22,7 +22,6 @@ class Bullet {
     draw () {
         if( this.sprite.isReady ) {
 
-            console.debug('bullet sprite is ready')
 
             this.ctx.drawImage(
                 this.sprite, 
@@ -35,8 +34,6 @@ class Bullet {
     move() {
         this.y += this.vy
 
-        console.log('bullet height')
-        console.log(this.y)
     }
 
     updatePosition (vx, vy) {

@@ -61,7 +61,6 @@ class Spaceship {
     draw () {
         if( this.sprite.isReady ) {
 
-            console.debug('spaceship sprite is ready')
 
             this.ctx.drawImage(
                 this.sprite,
@@ -77,5 +76,11 @@ class Spaceship {
             this.x + this.w / 2 - BULLET_W / 2,
             this.y)
         )
+    }
+
+    destroyBullet(bullet) {
+        this.bullets = this.bullets.filter((b, index) => {
+           return b !== bullet
+        })  
     }
 }
