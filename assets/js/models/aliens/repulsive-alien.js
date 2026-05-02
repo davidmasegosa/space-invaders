@@ -6,8 +6,8 @@ class RepulsiveAlien {
         this.x = x
         this.y = y
 
-        this.w = ALIEN_W
-        this.h = ALIEN_H
+        this.w = ALIEN_REPULSIVE_W
+        this.h = ALIEN_REPULSIVE_H
 
         this.bullets = []
 

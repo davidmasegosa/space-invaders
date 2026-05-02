@@ -6,8 +6,8 @@ class HorribleAlien {
         this.x = x
         this.y = y
 
-        this.w = ALIEN_W
-        this.h = ALIEN_H
+        this.w = ALIEN_HORRIBLE_W
+        this.h = ALIEN_HORRIBLE_H
 
         this.bullets = []
 

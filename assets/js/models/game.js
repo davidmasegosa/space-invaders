@@ -195,13 +195,16 @@ class Game {
     }
 
     checkSpaceshipBulletsCollision(bullet, alien) {
-        if( (bullet.x >= alien.x && bullet.x <= alien.x + alien.w) &&
-            (bullet.y + BULLET_H <= alien.y + ALIEN_H && bullet.y >= alien.y) )
-        {
+        const bulletRight = bullet.x + BULLET_W;
+        const bulletBottom = bullet.y + BULLET_H;
+        const alienRight = alien.x + alien.w;
+        const alienBottom = alien.y + alien.h;
 
-            console.debug('Collision detected!!!')
-            return true
+        if (bullet.x < alienRight && bulletRight > alien.x &&
+            bullet.y < alienBottom && bulletBottom > alien.y) {
+            return true;
         }
+        return false;
     }
 
     checkAlienBulletsCollisions() {
@@ -220,13 +223,16 @@ class Game {
     }
 
     checkAlienBulletCollision(bullet, spaceship) {
-        if( (bullet.x >= spaceship.x && bullet.x <= spaceship.x + spaceship.w) &&
-            (bullet.y + BULLET_H <= spaceship.y + SPACESHIP_H && bullet.y >= spaceship.y) )
-        {
+        const bulletRight = bullet.x + BULLET_W;
+        const bulletBottom = bullet.y + BULLET_H;
+        const spaceshipRight = spaceship.x + spaceship.w;
+        const spaceshipBottom = spaceship.y + spaceship.h;
 
-            console.debug('Collision detected!!!')
-            return true
+        if (bullet.x < spaceshipRight && bulletRight > spaceship.x &&
+            bullet.y < spaceshipBottom && bulletBottom > spaceship.y) {
+            return true;
         }
+        return false;
     }
 
     checkOverLifes () {

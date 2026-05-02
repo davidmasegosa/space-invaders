@@ -5,15 +5,24 @@ class AlienArmy {
         this.remainingHordes = 3
 
         this.firstHordeDefinition = [
-            ['U'],
+            ['R','R','R','R','R','R','R','R','R','R','R'],
+            ['H','H','H','H','H','H','H','H','H','H','H'],
+            ['U','U','U','U','U','U','U','U','U','U','U']
         ]
 
         this.secondHordeDefinition = [
-            ['R']
+            ['R','R','R','R','R','R','R','R','R','R','R'],
+            ['R','R','R','R','R','R','R','R','R','R','R'],
+            ['H','H','H','H','H','H','H','H','H','H','H'],
+            ['U','U','U','U','U','U','U','U','U','U','U']
         ]
 
         this.finalHordeDefinition = [
-            ['R']
+            ['R','R','R','R','R','R','R','R','R','R','R'],
+            ['R','R','R','R','R','R','R','R','R','R','R'],
+            ['H','H','H','H','H','H','H','H','H','H','H'],
+            ['H','H','H','H','H','H','H','H','H','H','H'],
+            ['U','U','U','U','U','U','U','U','U','U','U']
         ]
 
         this.currentHorde = undefined
