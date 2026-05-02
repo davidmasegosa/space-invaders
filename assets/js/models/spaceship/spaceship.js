@@ -17,7 +17,7 @@ class Spaceship {
             this.sprite.isReady = true
         }
 
-        this.bulletTimeoutActive = false
+        this.bulletWaitActive = false
 
         this.bullets = []
     }
@@ -41,11 +41,11 @@ class Spaceship {
                 }
                 break
             case KEY_SPACE:
-                if(isPressed && !this.bulletTimeoutActive) {
-                    this.bulletTimeoutActive = true
+                if(isPressed && !this.bulletWaitActive) {
+                    this.bulletWaitActive = true
                     
                     window.setTimeout(() => {
-                        this.bulletTimeoutActive = false
+                        this.bulletWaitActive = false
                     }, 500)
                     
                     this.shoot()
@@ -60,7 +60,6 @@ class Spaceship {
 
     draw () {
         if( this.sprite.isReady ) {
-
 
             this.ctx.drawImage(
                 this.sprite,
