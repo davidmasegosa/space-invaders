@@ -80,9 +80,9 @@ class Game {
                 this.checkBounds()
                 this.checkSpaceshipBulletsCollisions()
                 this.checkAlienBulletsCollisions()
+                this.draw()
                 this.checkOverLifes()
                 this.checkAllAliensDead()
-                this.draw()
             }, this.fps)
         }
     }
@@ -280,6 +280,7 @@ class Game {
 
     playerWins () {
         window.clearInterval(this.drawIntervalId)
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.resetGameValues()
         this.screen = 'congratulations'
         this.drawCongratulationsScreen()
