@@ -14,12 +14,10 @@ class AlienHorde {
     }
 
     createHorde() {
-        
+
         const hordeDefinition = [
             ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
             ['H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'],
-            ['H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'],
-            ['U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U'],
             ['U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U']
         ]
 
@@ -88,20 +86,20 @@ class AlienHorde {
     }
 
     moveRight() {
-        this.vx = 0.2
+        this.vx = 0.35
         this.vy = 0
         this.updatePosition()
     }
 
     moveLeft() {
-        this.vx = -0.2
+        this.vx = -0.35
         this.vy = 0
         this.updatePosition()
     }
 
     moveDown() {
         this.vx = 0
-        this.vy = 0.2
+        this.vy = 0.35
         this.updatePosition()
     }
 
