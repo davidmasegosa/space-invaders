@@ -117,15 +117,11 @@ class AlienHorde {
     }
 
     destroyAlien(alien) { 
-        console.log(this.horde)
 
-        const aliensHorde = this.horde
-
-        aliensHorde.forEach(function(row, i) {
-            aliensHorde[i] = row.filter(function(al, j){
-                return alien !== al
-            })
+        this.horde.forEach((row, i) => {
+            this.horde[i] = row.filter((al, j) => alien !== al)
         })
+        
     }
 
 }
