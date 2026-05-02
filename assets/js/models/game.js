@@ -279,6 +279,7 @@ class Game {
     }
 
     playerWins () {
+        window.clearInterval(this.drawIntervalId)
         this.resetGameValues()
         this.screen = 'congratulations'
         this.drawCongratulationsScreen()
