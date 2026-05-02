@@ -155,6 +155,26 @@ class Game {
                 })
             })
         }
+
+        /* Spaceship bullets */
+
+        this.spaceship.bullets.forEach(bullet => {
+            if(bullet.y + bullet.h < SCORE_PANEL_H + BULLET_H) {
+                this.spaceship.destroyBullet(bullet)
+            }
+        })
+
+        /* Alien bullets */
+
+        this.alienHorde.horde.forEach(row => {
+            row.forEach(alien => {
+                alien.bullets.forEach(bullet => {
+                    if(bullet.y > CANVAS_H - LIFES_PANEL_H - BULLET_H) {
+                        alien.destroyBullet(bullet)
+                    }
+                })
+            })
+        })
     }
 
     checkSpaceshipBulletsCollisions() {
