@@ -22,7 +22,8 @@ class Game {
             CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - DEFAULT_SEPARATION
         )
 
-        this.alienHorde = new AlienHorde(this.ctx)
+        this.alienArmy = new AlienArmy(this.ctx)
+        this.alienHorde = this.alienArmy.currentHorde
 
         this.drawIntervalId = undefined
         
@@ -219,6 +220,7 @@ class Game {
 
     gameOver () {
         this.resetGameValues()
+        this.screen = 'game-over'
         this.drawGameOverScreen()
     }
 
@@ -246,8 +248,9 @@ class Game {
         this.lifes = 3
 
         this.drawIntervalId = undefined
-
-        this.alienHorde = new AlienHorde(this.ctx)
+        
+        this.alienArmy = new AlienArmy(this.ctx)
+        this.alienHorde = this.alienArmy.currentHorde
     }
 
     checkAllAliensDead() {
@@ -259,15 +262,25 @@ class Game {
         console.log(remainingAliensCount)
 
         if(remainingAliensCount <= 0) {
-            window.clearInterval(this.drawIntervalId)
-            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-            this.screen = 'congratulations'
+            this.checkRemainingHordes()
+        }
+    }
+
+    checkRemainingHordes() {
+        if(this.alienArmy.remainingHordes <= 1) {
             this.playerWins()
+            
+        }
+        else {
+            this.alienArmy.remainingHordes -= 1
+            this.alienArmy.createHorde()
+            this.alienHorde = this.alienArmy.currentHorde
         }
     }
 
     playerWins () {
         this.resetGameValues()
+        this.screen = 'congratulations'
         this.drawCongratulationsScreen()
     }
 
@@ -278,8 +291,8 @@ class Game {
         this.CongratulationsSprite.onload = () => {
             this.ctx.drawImage(
                 this.CongratulationsSprite, 
-                (CANVAS_W - GAME_OVER_SCREEN_W) / 2,
-                (CANVAS_H - GAME_OVER_SCREEN_H) / 2
+                (CANVAS_W - CONGRATS_SCREEN_W) / 2,
+                (CANVAS_H - CONGRATS_SCREEN_H) / 2
             )
         }
     }

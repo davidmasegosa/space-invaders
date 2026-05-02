@@ -1,6 +1,8 @@
 class AlienHorde {
-    constructor(ctx) {
+    constructor(ctx, hordeDefinition) {
         this.ctx = ctx
+
+        this.hordeDefinition = hordeDefinition
 
         this.horde = []
         this.createHorde()
@@ -17,18 +19,12 @@ class AlienHorde {
 
     createHorde() {
 
-        const hordeDefinition = [
-            ['R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R', 'R'],
-            ['H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H', 'H'],
-            ['U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U', 'U']
-        ]
-
-        for (let i = 0; i < hordeDefinition.length; i++) {
-            let row = hordeDefinition[i]
+        for (let i = 0; i < this.hordeDefinition.length; i++) {
+            let row = this.hordeDefinition[i]
             this.horde[i] = new Array()
 
             for (let j = 0; j < row.length; j++) {
-                let alien = hordeDefinition[i][j]
+                let alien = this.hordeDefinition[i][j]
 
                 if(alien === 'U') {
                     this.horde[i][j] = new UglyAlien(
@@ -104,7 +100,7 @@ class AlienHorde {
     hordeAttack() {
         this.attackIntervalId = window.setInterval(() => {
             this.hordeAlienShoot()
-        }, 3000)
+        }, 2000)
     }
 
     hordeAlienShoot() {
