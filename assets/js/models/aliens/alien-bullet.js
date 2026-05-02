@@ -17,13 +17,10 @@ class AlienBullet {
         this.sprite.onload = () => {
             this.sprite.isReady = true
         }
-
-        console.log('Alien bullet created')
     }
 
     draw () {
         if( this.sprite.isReady ) {
-
 
             this.ctx.drawImage(
                 this.sprite, 
@@ -36,10 +33,5 @@ class AlienBullet {
     move() {
         this.y += this.vy
 
-    }
-
-    updatePosition (vx, vy) {
-        this.x += vx
-        this.y += vy
     }
 }

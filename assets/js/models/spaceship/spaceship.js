@@ -71,7 +71,7 @@ class Spaceship {
     }
 
     shoot() {
-        this.bullets.push(new Bullet(
+        this.bullets.push(new SpaceshipBullet(
             this.ctx,
             this.x + this.w / 2 - BULLET_W / 2,
             this.y)

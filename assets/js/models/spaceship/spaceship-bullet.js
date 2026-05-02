@@ -1,4 +1,4 @@
-class Bullet {
+class SpaceshipBullet {
 
     constructor(ctx, x, y) {
         this.ctx = ctx
@@ -9,7 +9,7 @@ class Bullet {
         this.w = BULLET_W
         this.h = BULLET_H
 
-        this.vy = -2
+        this.vy = -4
 
         this.sprite = new Image()
         this.sprite.src = '/assets/images/sprites/sprite-bullet.png'
@@ -22,7 +22,6 @@ class Bullet {
     draw () {
         if( this.sprite.isReady ) {
 
-
             this.ctx.drawImage(
                 this.sprite, 
                 this.x,
@@ -33,11 +32,6 @@ class Bullet {
 
     move() {
         this.y += this.vy
-
     }
 
-    updatePosition (vx, vy) {
-        this.x += vx
-        this.y += vy
-    }
 }
