@@ -78,16 +78,8 @@ class ScorePanel {
         this.ctx.lineTo(600, SCORE_PANEL_H - SCORE_PANEL_STROKE_WIDTH)
         this.ctx.stroke()
 
-        if( this.textSprite.isReady ) {
-
-            this.ctx.drawImage(
-                this.textSprite,
-                25,
-                (SCORE_PANEL_H - SCORE_PANEL_TEXT_H * 3) / 2,
-            )
-        }
-
-        if( 
+        if (
+            this.textSprite.isReady &&
             this.number0Sprite.isReady &&
             this.number1Sprite.isReady &&
             this.number2Sprite.isReady &&
@@ -98,14 +90,20 @@ class ScorePanel {
             this.number7Sprite.isReady &&
             this.number8Sprite.isReady &&
             this.number9Sprite.isReady
-         ) {
+        )
+        {
+            this.ctx.drawImage(
+                this.textSprite,
+                25,
+                (SCORE_PANEL_H - SCORE_PANEL_TEXT_H * 3) / 2,
+            )
 
-            let panelScore = score.toString().padStart(6, '0')
+            const panelScore = score.toString().padStart(6, '0')
 
-            let digits = panelScore.split('')
+            const digits = panelScore.split('')
 
                 digits.forEach((digit, index) => {
-                    let sprite = this[`number${digit}Sprite`]
+                    const sprite = this[`number${digit}Sprite`]
 
                     this.ctx.drawImage(
                         sprite,
@@ -113,7 +111,6 @@ class ScorePanel {
                         (SCORE_PANEL_H - SCORE_PANEL_TEXT_H * 3) / 2 + (SCORE_PANEL_TEXT_H * 2)
                     )
                 })
-        console.log('score!!!')
         }
 
     }
