@@ -134,7 +134,7 @@ class Game {
                     if(alien.x + ALIEN_W > CANVAS_W - DEFAULT_SEPARATION) {
                         this.alienHorde.moveDirection = 'down'
                         window.setTimeout(() => {
-                            this.alienHorde.stopMovingDown('left')
+                            this.alienHorde.stopMovingDownAndMoveDirection('left')
                         }, 3000)
                     }
                 })
@@ -148,7 +148,7 @@ class Game {
                     if(alien.x < DEFAULT_SEPARATION) {
                         this.alienHorde.moveDirection = 'down'
                         window.setTimeout(() => {
-                            this.alienHorde.stopMovingDown('right')
+                            this.alienHorde.stopMovingDownAndMoveDirection('right')
                         }, 3000)
                     }
                 })
@@ -163,7 +163,7 @@ class Game {
                     row.forEach(alien => {
                         if( this.checkSpaceshipBulletsCollision(bullet, alien)) {
                             console.debug('Collision detected')
-                            this.alienHorde.killAlien(alien)
+                            this.alienHorde.destroyAlien(alien)
                             this.score += alien.points
                             this.spaceship.destroyBullet(bullet)
                         }

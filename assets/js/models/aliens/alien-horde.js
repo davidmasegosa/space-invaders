@@ -10,7 +10,9 @@ class AlienHorde {
 
         this.moveDirection = 'right'
 
-        this.attack()
+        this.attackIntervalId = null
+
+        this.hordeAttack()
     }
 
     createHorde() {
@@ -25,10 +27,8 @@ class AlienHorde {
             let row = hordeDefinition[i]
             this.horde[i] = new Array()
 
-
             for (let j = 0; j < row.length; j++) {
                 let alien = hordeDefinition[i][j]
-
 
                 if(alien === 'U') {
                     this.horde[i][j] = new UglyAlien(
@@ -64,7 +64,6 @@ class AlienHorde {
             for (let j = 0; j < this.horde[i].length; j++) {
                 let alien = this.horde[i][j]
                 alien.draw(alien.x, alien.y)
-                
             }
         }
 
@@ -72,50 +71,52 @@ class AlienHorde {
 
     move() {
 
+        if(this.moveDirection) {
 
-        if(this.moveDirection === 'right') {
-            this.moveRight()
-        }
+            if(this.moveDirection === 'right') {
+                this.vx = 0.35
+                this.vy = 0
+            }
 
-        else if(this.moveDirection === 'left') {
-            this.moveLeft()
-        }
-        else if(this.moveDirection === 'down') {
-            this.moveDown()
-        }
-    }
+            else if(this.moveDirection === 'left') {
+                this.vx = -0.35
+                this.vy = 0
+            }
 
-    moveRight() {
-        this.vx = 0.35
-        this.vy = 0
-        this.updatePosition()
-    }
+            else if(this.moveDirection === 'down') {
+                this.vx = 0
+                this.vy = 0.35
+            }
 
-    moveLeft() {
-        this.vx = -0.35
-        this.vy = 0
-        this.updatePosition()
-    }
-
-    moveDown() {
-        this.vx = 0
-        this.vy = 0.35
-        this.updatePosition()
-    }
-
-    updatePosition() {
-        this.horde.forEach(row => {
-            row.forEach(alien => {
-                alien.updatePosition(this.vx, this.vy)
+            this.horde.forEach(row => {
+                row.forEach(alien => {
+                    alien.updatePosition(this.vx, this.vy)
+                })
             })
-        })
+        }
+
     }
 
-    stopMovingDown(nextDirection) {
+    stopMovingDownAndMoveDirection(nextDirection) {
         this.moveDirection = nextDirection
     }
 
-    killAlien(alien) { 
+    hordeAttack() {
+        this.attackIntervalId = window.setInterval(() => {
+            this.hordeAlienShoot()
+        }, 3000)
+    }
+
+    hordeAlienShoot() {
+        const randomRowIndex = Math.floor(Math.random() * this.horde.length)
+        const randomRow = this.horde[randomRowIndex]
+        const randomAlienIndex = Math.floor(Math.random() * randomRow.length)
+        const randomAlien = randomRow[randomAlienIndex]
+
+        randomAlien.shoot()
+    }
+
+    destroyAlien(alien) { 
         console.log(this.horde)
 
         const aliensHorde = this.horde
@@ -127,22 +128,4 @@ class AlienHorde {
         })
     }
 
-    attack() {
-        window.setInterval(() => {
-            this.shoot()
-        }, 3000)
-    }
-
-    shoot() {
-        const randomRowIndex = Math.floor(Math.random() * this.horde.length)
-        const randomRow = this.horde[randomRowIndex]
-        const randomAlienIndex = Math.floor(Math.random() * randomRow.length)
-        const randomAlien = randomRow[randomAlienIndex]
-
-        console.log('random alien')
-
-        console.log(randomAlien)
-
-        randomAlien.shoot()
-    }
 }
