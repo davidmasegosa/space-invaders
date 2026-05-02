@@ -115,37 +115,6 @@ class AlienHorde {
         this.moveDirection = nextDirection
     }
 
-    checkBounds() {
-
-        if(this.moveDirection === 'right') {
-            this.horde.forEach(row => {
-                row.forEach(alien => {
-
-                    if(alien.x + ALIEN_W > CANVAS_W - DEFAULT_SEPARATION) {
-                        this.moveDirection = 'down'
-                        window.setTimeout(() => {
-                            this.stopMovingDown('left')
-                        }, 3000)
-                    }
-                })
-            })
-        }
-
-        if(this.moveDirection === 'left') {
-            this.horde.forEach(row => {
-                row.forEach(alien => {
-
-                    if(alien.x < DEFAULT_SEPARATION) {
-                        this.moveDirection = 'down'
-                        window.setTimeout(() => {
-                            this.stopMovingDown('right')
-                        }, 3000)
-                    }
-                })
-            })
-        }
-    } 
-
     killAlien(alien) { 
         console.log(this.horde)
 

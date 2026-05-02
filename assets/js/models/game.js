@@ -3,9 +3,15 @@ class Game {
         this.canvas = document.getElementById(canvasId)
         this.canvas.width = CANVAS_W
         this.canvas.height = CANVAS_H
+        
         this.ctx = this.canvas.getContext('2d')
+        
+        this.score = 0
+        this.lifes = 3
 
-        this.screen = 'welcome'
+        this.fps = FPS
+
+        this.screen = 'not-started'
 
         this.scorePanel = new ScorePanel(this.ctx)
         this.lifesPanel = new LifesPanel(this.ctx)
@@ -18,18 +24,33 @@ class Game {
 
         this.alienHorde = new AlienHorde(this.ctx)
 
-        this.score = 0
-
-        this.lifes = 3
-
-        this.fps = FPS
-
         this.drawIntervalId = undefined
+        
+        addEventListener('keydown', (event) => this.onKeyEvent(event))
+        addEventListener('keyup', (event) => this.onKeyEvent(event))
     }
 
     start() {
+        this.screen = 'welcome'
         this.drawWelcomeScreen()
-        addEventListener('keydown', (event) => this.onKeyEvent(event))
+    }
+
+    onKeyEvent(event) {
+        if(this.screen === 'game') {
+            this.spaceship.onKeyEvent(event)
+        }
+
+        else if(this.screen === 'welcome' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
+            this.startPlaying()
+        }
+
+        else if(this.screen === 'game-over' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
+            this.startPlaying()
+        }
+
+        else if(this.screen === 'congratulations' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
+            this.startPlaying()
+        }
     }
 
     drawWelcomeScreen() {
@@ -44,21 +65,7 @@ class Game {
             )
         }
     }
-
-    onKeyEvent(event) {
-        if(this.screen === 'welcome' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
-            this.startPlaying()
-        }
-
-        else if(this.screen === 'game-over' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
-            this.startPlaying()
-        }
-
-        else if(this.screen === 'congratulations' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
-            this.startPlaying()
-        }
-    }
-
+    
     startPlaying() {
         console.debug('Game started')
 
@@ -66,24 +73,17 @@ class Game {
 
         if(!this.drawIntervalId) {
 
-            this.setupListeners()
-
             this.drawIntervalId = setInterval(() => {
                 this.clear()
                 this.move()
                 this.checkBounds()
-                this.checkCollisions()
+                this.checkSpaceshipBulletsCollisions()
                 this.checkAlienBulletsCollisions()
+                this.checkOverLifes()
+                this.checkAllAliensDead()
                 this.draw()
-                this.checkGameOver()
-                this.checkPlayerWins()
             }, this.fps)
         }
-    }
-
-    setupListeners() {
-        addEventListener('keydown', (event) => this.spaceship.onKeyEvent(event))
-        addEventListener('keyup', (event) => this.spaceship.onKeyEvent(event))
     }
 
     clear() {
@@ -116,6 +116,7 @@ class Game {
 
     checkBounds() {
         /* Spaceship */
+
         if(this.spaceship.x < DEFAULT_SEPARATION) {
             this.spaceship.x = DEFAULT_SEPARATION
         }
@@ -125,15 +126,42 @@ class Game {
         }
 
         /* Horde */
-        this.alienHorde.checkBounds()
+
+        if(this.alienHorde.moveDirection === 'right') {
+            this.alienHorde.horde.forEach(row => {
+                row.forEach(alien => {
+
+                    if(alien.x + ALIEN_W > CANVAS_W - DEFAULT_SEPARATION) {
+                        this.alienHorde.moveDirection = 'down'
+                        window.setTimeout(() => {
+                            this.alienHorde.stopMovingDown('left')
+                        }, 3000)
+                    }
+                })
+            })
+        }
+
+        if(this.alienHorde.moveDirection === 'left') {
+            this.alienHorde.horde.forEach(row => {
+                row.forEach(alien => {
+
+                    if(alien.x < DEFAULT_SEPARATION) {
+                        this.alienHorde.moveDirection = 'down'
+                        window.setTimeout(() => {
+                            this.alienHorde.stopMovingDown('right')
+                        }, 3000)
+                    }
+                })
+            })
+        }
     }
 
-    checkCollisions() {
+    checkSpaceshipBulletsCollisions() {
         if(this.spaceship.bullets.length > 0 && this.alienHorde.horde.length > 0) {
             this.spaceship.bullets.forEach(bullet => {
                 this.alienHorde.horde.forEach(row => {
                     row.forEach(alien => {
-                        if( this.checkCollision(bullet, alien)) {
+                        if( this.checkSpaceshipBulletsCollision(bullet, alien)) {
                             console.debug('Collision detected')
                             this.alienHorde.killAlien(alien)
                             this.score += alien.points
@@ -145,7 +173,7 @@ class Game {
         }
     }
 
-    checkCollision(bullet, alien) {
+    checkSpaceshipBulletsCollision(bullet, alien) {
         if( (bullet.x >= alien.x && bullet.x <= alien.x + alien.w) &&
             (bullet.y + BULLET_H <= alien.y + ALIEN_H && bullet.y >= alien.y) )
         {
@@ -180,7 +208,7 @@ class Game {
         }
     }
 
-    checkGameOver () {
+    checkOverLifes () {
         if(this.lifes <= 0) {
             window.clearInterval(this.drawIntervalId)
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
@@ -192,7 +220,6 @@ class Game {
     gameOver () {
         this.resetGameValues()
         this.drawGameOverScreen()
-        addEventListener('keydown', (event) => this.onKeyEvent(event))
     }
 
     drawGameOverScreen() {
@@ -215,16 +242,15 @@ class Game {
             CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - DEFAULT_SEPARATION
         )
 
-        this.alienHorde = new AlienHorde(this.ctx)
-
         this.score = 0
-
         this.lifes = 3
 
         this.drawIntervalId = undefined
+
+        this.alienHorde = new AlienHorde(this.ctx)
     }
 
-    checkPlayerWins() {
+    checkAllAliensDead() {
         let remainingAliensCount = 0
 
         this.alienHorde.horde.forEach(row => row.forEach( al => remainingAliensCount++))
@@ -243,7 +269,6 @@ class Game {
     playerWins () {
         this.resetGameValues()
         this.drawCongratulationsScreen()
-        addEventListener('keydown', (event) => this.onKeyEvent(event))
     }
 
     drawCongratulationsScreen() {
