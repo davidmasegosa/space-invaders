@@ -12,7 +12,7 @@ class SpaceshipBullet {
         this.vy = -4
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/sprite-bullet.png'
+        this.sprite.src = './assets/images/sprites/sprite-bullet.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true

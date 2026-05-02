@@ -56,7 +56,7 @@ class Game {
 
     drawWelcomeScreen() {
         this.welcomeSprite = new Image()
-        this.welcomeSprite.src = '/assets/images/sprites/screens/sprite-welcome.png'
+        this.welcomeSprite.src = './assets/images/sprites/screens/sprite-welcome.png'
 
         this.welcomeSprite.onload = () => {
             this.ctx.drawImage(
@@ -226,7 +226,7 @@ class Game {
 
     drawGameOverScreen() {
         this.gameOverSprite = new Image()
-        this.gameOverSprite.src = '/assets/images/sprites/screens/sprite-game-over.png'
+        this.gameOverSprite.src = './assets/images/sprites/screens/sprite-game-over.png'
 
         this.gameOverSprite.onload = () => {
             this.ctx.drawImage(
@@ -286,7 +286,7 @@ class Game {
 
     drawCongratulationsScreen() {
         this.CongratulationsSprite = new Image()
-        this.CongratulationsSprite.src = '/assets/images/sprites/screens/sprite-congratulations.png'
+        this.CongratulationsSprite.src = './assets/images/sprites/screens/sprite-congratulations.png'
 
         this.CongratulationsSprite.onload = () => {
             this.ctx.drawImage(

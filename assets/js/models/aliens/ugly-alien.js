@@ -13,7 +13,7 @@ class UglyAlien {
         this.bullets = []
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/aliens/sprite-ugly-alien.png'
+        this.sprite.src = './assets/images/sprites/aliens/sprite-ugly-alien.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true

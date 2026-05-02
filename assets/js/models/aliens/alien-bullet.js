@@ -12,7 +12,7 @@ class AlienBullet {
         this.vy = 2
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/sprite-alien-bullet.png'
+        this.sprite.src = './assets/images/sprites/sprite-alien-bullet.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true

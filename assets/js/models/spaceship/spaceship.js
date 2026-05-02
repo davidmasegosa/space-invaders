@@ -12,7 +12,7 @@ class Spaceship {
         this.vx = 0
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/sprite-spaceship.png'
+        this.sprite.src = './assets/images/sprites/sprite-spaceship.png'
         this.sprite.onload = () => {
             this.sprite.isReady = true
         }

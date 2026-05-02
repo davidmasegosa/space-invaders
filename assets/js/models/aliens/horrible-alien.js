@@ -14,7 +14,7 @@ class HorribleAlien {
         this.points = ALIEN_HORRIBLE_POINTS
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/aliens/sprite-horrible-alien.png'
+        this.sprite.src = './assets/images/sprites/aliens/sprite-horrible-alien.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true

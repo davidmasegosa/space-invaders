@@ -14,7 +14,7 @@ class RepulsiveAlien {
         this.points = ALIEN_REPULSIVE_POINTS
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/aliens/sprite-repulsive-alien.png'
+        this.sprite.src = './assets/images/sprites/aliens/sprite-repulsive-alien.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true

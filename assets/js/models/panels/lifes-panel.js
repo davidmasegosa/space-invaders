@@ -4,7 +4,7 @@ class LifesPanel {
         this.ctx = ctx
 
         this.sprite = new Image()
-        this.sprite.src = '/assets/images/sprites/sprite-spaceship.png'
+        this.sprite.src = './assets/images/sprites/sprite-spaceship.png'
 
         this.sprite.onload = () => {
             this.sprite.isReady = true
