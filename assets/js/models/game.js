@@ -21,15 +21,6 @@ class Game {
         this.scorePanel = new ScorePanel(this.ctx)
         this.lifesPanel = new LifesPanel(this.ctx)
 
-        this.spaceship = new Spaceship(
-            this.ctx,
-            (CANVAS_W - SPACESHIP_W) / 2,
-            CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - DEFAULT_SEPARATION
-        )
-
-        this.alienArmy = new AlienArmy(this.ctx)
-        this.alienHorde = this.alienArmy.currentHorde
-
         this.drawIntervalId = undefined
         
         addEventListener('keydown', (event) => this.onKeyEvent(event))
@@ -80,6 +71,15 @@ class Game {
 
         this.backgroundMusic.currentTime = 0
         this.backgroundMusic.play()
+
+        this.spaceship = new Spaceship(
+            this.ctx,
+            (CANVAS_W - SPACESHIP_W) / 2,
+            CANVAS_H - LIFES_PANEL_H - SPACESHIP_H - DEFAULT_SEPARATION
+        )
+
+        this.alienArmy = new AlienArmy(this.ctx)
+        this.alienHorde = this.alienArmy.currentHorde
 
         if(!this.drawIntervalId) {
 
