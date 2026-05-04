@@ -16,6 +16,7 @@ class Game {
         this.fps = FPS
 
         this.screen = 'not-started'
+        this.canRestart = true
 
         this.scorePanel = new ScorePanel(this.ctx)
         this.lifesPanel = new LifesPanel(this.ctx)
@@ -50,13 +51,11 @@ class Game {
             this.startPlaying()
         }
 
-        else if(this.screen === 'game-over' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
-            this.backgroundMusic.pause()
+        else if(this.canRestart && this.screen === 'game-over' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
             this.startPlaying()
         }
 
-        else if(this.screen === 'congratulations' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
-            this.backgroundMusic.pause()
+        else if(this.canRestart && this.screen === 'congratulations' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
             this.startPlaying()
         }
     }
@@ -315,6 +314,8 @@ class Game {
     gameOver () {
         this.resetGameValues()
         this.screen = 'game-over'
+        this.canRestart = false
+        setTimeout(() => this.canRestart = true, 3000)
         this.drawGameOverScreen()
     }
 
@@ -377,6 +378,8 @@ class Game {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.resetGameValues()
         this.screen = 'congratulations'
+        this.canRestart = false
+        setTimeout(() => this.canRestart = true, 3000)
         this.backgroundMusic.pause()
         this.drawCongratulationsScreen()
     }
