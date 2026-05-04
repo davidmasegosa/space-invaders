@@ -8,6 +8,7 @@ class Game {
 
         this.backgroundMusic = document.getElementById('background-music')
         this.spaceshipExplosionSound = new Audio('./assets/sounds/spaceship-explosion.mp3')
+        this.alienKilledSound = new Audio('./assets/sounds/alien-killed.mp3')
         
         this.score = 0
         this.lifes = 3
@@ -194,6 +195,8 @@ class Game {
                     row.forEach(alien => {
                         if( this.checkSpaceshipBulletsCollision(bullet, alien)) {
                             console.debug('Collision detected')
+                            this.alienKilledSound.currentTime = 0
+                            this.alienKilledSound.play()
                             this.alienHorde.destroyAlien(alien)
                             this.score += alien.points
                             this.spaceship.destroyBullet(bullet)
