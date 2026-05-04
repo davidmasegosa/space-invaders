@@ -5,6 +5,8 @@ class Game {
         this.canvas.height = CANVAS_H
         
         this.ctx = this.canvas.getContext('2d')
+
+        this.backgroundMusic = document.getElementById('background-music')
         
         this.score = 0
         this.lifes = 3
@@ -46,10 +48,12 @@ class Game {
         }
 
         else if(this.screen === 'game-over' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
+            this.backgroundMusic.stop()
             this.startPlaying()
         }
 
         else if(this.screen === 'congratulations' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
+            this.backgroundMusic.stop()
             this.startPlaying()
         }
     }
@@ -71,6 +75,9 @@ class Game {
         console.debug('Game started')
 
         this.screen = 'game'
+
+        this.backgroundMusic.currentTime = 0
+        this.backgroundMusic.play()
 
         if(!this.drawIntervalId) {
 
