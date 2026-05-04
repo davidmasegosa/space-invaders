@@ -83,6 +83,7 @@ class Game {
                 this.draw()
                 this.checkOverLifes()
                 this.checkAllAliensDead()
+                this.checkAlienTouchesGround()
             }, this.fps)
         }
     }
@@ -220,6 +221,19 @@ class Game {
                 });
             });
         });
+    }
+
+    checkAlienTouchesGround(){
+        this.alienHorde.horde.forEach(row => {
+            row.forEach(alien => {
+                if (alien.y + alien.h >= CANVAS_H - LIFES_PANEL_H) {
+                    window.clearInterval(this.drawIntervalId)
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+                    this.screen = 'game-over'
+                    this.gameOver()
+                }
+            })
+        })
     }
 
     checkAlienBulletCollision(bullet, spaceship) {
