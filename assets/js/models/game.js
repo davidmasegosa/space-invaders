@@ -83,6 +83,7 @@ class Game {
                 this.draw()
                 this.checkOverLifes()
                 this.checkAllAliensDead()
+                this.checkAlienSpaceshipCollision()
                 this.checkAlienTouchesGround()
             }, this.fps)
         }
@@ -221,6 +222,32 @@ class Game {
                 });
             });
         });
+    }
+
+    checkAlienSpaceshipCollision() {
+        this.alienHorde.horde.forEach(row => {
+            row.forEach(alien => {
+                if (this.alienSpaceshipCollisionDetection(alien, this.spaceship)) {
+                    window.clearInterval(this.drawIntervalId)
+                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+                    this.screen = 'game-over'
+                    this.gameOver()
+                }
+            })
+        })
+    }
+
+    alienSpaceshipCollisionDetection(alien, spaceship) {
+        const alienRight = alien.x + alien.w;
+        const alienBottom = alien.y + alien.h;
+        const spaceshipRight = spaceship.x + spaceship.w;
+        const spaceshipBottom = spaceship.y + spaceship.h;
+
+        if( alien.x < spaceshipRight && alienRight > spaceship.x &&
+            alien.y < spaceshipBottom && alienBottom > spaceship.y) {
+            return true;
+        }
+        return false;
     }
 
     checkAlienTouchesGround(){
