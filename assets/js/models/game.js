@@ -6,7 +6,7 @@ class Game {
         
         this.ctx = this.canvas.getContext('2d')
 
-        this.backgroundMusic = document.getElementById('background-music')
+        this.backgroundMusic =  new Audio('./assets/sounds/spaceshooter-ost.mp3')
         this.spaceshipExplosionSound = new Audio('./assets/sounds/spaceship-explosion.mp3')
         this.alienKilledSound = new Audio('./assets/sounds/alien-killed.mp3')
         
@@ -41,6 +41,7 @@ class Game {
     }
 
     onKeyEvent(event) {
+        
         if(this.screen === 'game') {
             this.spaceship.onKeyEvent(event)
         }
@@ -50,12 +51,12 @@ class Game {
         }
 
         else if(this.screen === 'game-over' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
-            this.backgroundMusic.stop()
+            this.backgroundMusic.pause()
             this.startPlaying()
         }
 
         else if(this.screen === 'congratulations' && event.type === 'keydown' && event.keyCode === KEY_SPACE) {
-            this.backgroundMusic.stop()
+            this.backgroundMusic.pause()
             this.startPlaying()
         }
     }
@@ -259,6 +260,7 @@ class Game {
                     window.clearInterval(this.drawIntervalId)
                     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
                     this.screen = 'game-over'
+                    this.backgroundMusic.pause()
                     this.gameOver()
                 }
             })
@@ -290,6 +292,7 @@ class Game {
                         window.clearInterval(this.drawIntervalId)
                         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
                         this.screen = 'game-over'
+                        this.backgroundMusic.pause()
                         this.gameOver()
                     }
                 })
@@ -304,6 +307,7 @@ class Game {
             window.clearInterval(this.drawIntervalId)
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
             this.screen = 'game-over'
+            this.backgroundMusic.pause()
             this.gameOver()
         }
     }
@@ -373,6 +377,7 @@ class Game {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.resetGameValues()
         this.screen = 'congratulations'
+        this.backgroundMusic.pause()
         this.drawCongratulationsScreen()
     }
 
