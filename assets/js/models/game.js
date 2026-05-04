@@ -7,6 +7,7 @@ class Game {
         this.ctx = this.canvas.getContext('2d')
 
         this.backgroundMusic = document.getElementById('background-music')
+        this.spaceshipExplosionSound = new Audio('./assets/sounds/spaceship-explosion.mp3')
         
         this.score = 0
         this.lifes = 3
@@ -223,6 +224,8 @@ class Game {
                     if (this.checkAlienBulletCollision(bullet, this.spaceship)) {
                         //
                         console.debug('Collision detected')
+                        this.spaceshipExplosionSound.currentTime = 0
+                        this.spaceshipExplosionSound.play()
                         this.lifes -= 1
                         alien.destroyBullet(bullet)
                     }
@@ -231,10 +234,25 @@ class Game {
         });
     }
 
+    checkAlienBulletCollision(bullet, spaceship) {
+        const bulletRight = bullet.x + BULLET_W;
+        const bulletBottom = bullet.y + BULLET_H;
+        const spaceshipRight = spaceship.x + spaceship.w;
+        const spaceshipBottom = spaceship.y + spaceship.h;
+
+        if (bullet.x < spaceshipRight && bulletRight > spaceship.x &&
+            bullet.y < spaceshipBottom && bulletBottom > spaceship.y) {
+            return true;
+        }
+        return false;
+    }
+
     checkAlienSpaceshipCollision() {
         this.alienHorde.horde.forEach(row => {
             row.forEach(alien => {
                 if (this.alienSpaceshipCollisionDetection(alien, this.spaceship)) {
+                    this.spaceshipExplosionSound.currentTime = 0
+                    this.spaceshipExplosionSound.play()
                     window.clearInterval(this.drawIntervalId)
                     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
                     this.screen = 'game-over'
@@ -258,30 +276,25 @@ class Game {
     }
 
     checkAlienTouchesGround(){
+        let gameOverCalled = false;
         this.alienHorde.horde.forEach(row => {
-            row.forEach(alien => {
-                if (alien.y + alien.h >= CANVAS_H - LIFES_PANEL_H) {
-                    window.clearInterval(this.drawIntervalId)
-                    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-                    this.screen = 'game-over'
-                    this.gameOver()
-                }
-            })
+            if (!gameOverCalled) {
+                row.forEach(alien => {
+                    if (!gameOverCalled && alien.y + alien.h >= CANVAS_H - LIFES_PANEL_H) {
+                        this.spaceshipExplosionSound.currentTime = 0
+                        this.spaceshipExplosionSound.play()
+                        gameOverCalled = true;
+                        window.clearInterval(this.drawIntervalId)
+                        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+                        this.screen = 'game-over'
+                        this.gameOver()
+                    }
+                })
+            }
         })
     }
 
-    checkAlienBulletCollision(bullet, spaceship) {
-        const bulletRight = bullet.x + BULLET_W;
-        const bulletBottom = bullet.y + BULLET_H;
-        const spaceshipRight = spaceship.x + spaceship.w;
-        const spaceshipBottom = spaceship.y + spaceship.h;
-
-        if (bullet.x < spaceshipRight && bulletRight > spaceship.x &&
-            bullet.y < spaceshipBottom && bulletBottom > spaceship.y) {
-            return true;
-        }
-        return false;
-    }
+    
 
     checkOverLifes () {
         if(this.lifes <= 0) {

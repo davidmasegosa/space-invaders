@@ -20,6 +20,8 @@ class Spaceship {
         this.bulletWaitActive = false
 
         this.bullets = []
+
+        this.shootSound = new Audio('./assets/sounds/spaceship-shoot.mp3')
     }
 
     onKeyEvent(event) {
@@ -70,6 +72,9 @@ class Spaceship {
     }
 
     shoot() {
+        this.shootSound.currentTime = 0
+        this.shootSound.play()
+
         this.bullets.push(new SpaceshipBullet(
             this.ctx,
             this.x + this.w / 2 - BULLET_W / 2,
