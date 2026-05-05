@@ -6,10 +6,10 @@ class AlienBullet {
         this.x = x
         this.y = y
 
-        this.w = BULLET_W
-        this.h = BULLET_H
+        this.w = ALIEN_BULLET_W
+        this.h = ALIEN_BULLET_H
 
-        this.vy = 2
+        this.vy = ALIEN_BULLET_SPEED
 
         this.sprite = new Image()
         this.sprite.src = './assets/images/sprites/sprite-alien-bullet.png'

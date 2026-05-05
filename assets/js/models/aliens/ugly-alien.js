@@ -39,7 +39,7 @@ class UglyAlien {
     shoot() {
         this.bullets.push(new AlienBullet(
             this.ctx,
-            this.x + this.w / 2 - BULLET_W / 2,
+            this.x + this.w / 2 - ALIEN_BULLET_W / 2,
             this.y)
         )
     }
