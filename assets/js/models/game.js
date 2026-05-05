@@ -11,12 +11,19 @@ class Game {
         this.alienKilledSound = new Audio('./assets/sounds/alien-killed.mp3')
         
         this.score = 0
+        this.record = 0
         this.lifes = 3
 
         this.fps = FPS
 
         this.screen = 'not-started'
         this.canRestart = true
+
+        try {
+            this.record = Number(localStorage.getItem('record') || 0)
+        } catch (error) {
+            this.record = 0
+        }
 
         this.scorePanel = new ScorePanel(this.ctx)
         this.lifesPanel = new LifesPanel(this.ctx)
@@ -112,7 +119,7 @@ class Game {
     }
 
     draw() {
-        this.scorePanel.draw(this.score)
+        this.scorePanel.draw(this.score, this.record)
         this.lifesPanel.draw(this.lifes)
         this.spaceship.draw()
         this.spaceship.bullets.forEach(bullet => bullet.draw())
@@ -196,6 +203,16 @@ class Game {
                             this.alienKilledSound.play()
                             this.alienHorde.destroyAlien(alien)
                             this.score += alien.points
+
+                            if (this.score > this.record) {
+                                this.record = this.score
+                                try {
+                                    localStorage.setItem('record', String(this.record))
+                                } catch (error) {
+                                    // nothing
+                                }
+                            }
+
                             this.spaceship.destroyBullet(bullet)
                         }
                     })

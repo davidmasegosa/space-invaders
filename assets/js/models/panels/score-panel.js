@@ -9,10 +9,16 @@ class ScorePanel {
             this.textSprite.isReady = true
         }
 
+        this.recordSprite = new Image()
+        this.recordSprite.src = './assets/images/sprites/panels/score/record.png'
+        this.recordSprite.onload = () => {
+            this.recordSprite.isReady = true
+        }
+
         this.numbers = new Numbers(ctx)
     }
 
-    draw (score) {
+    draw (score, record = 0) {
         this.ctx.beginPath()
         this.ctx.lineWidth = SCORE_PANEL_STROKE_WIDTH
         this.ctx.strokeStyle = '#FFFFFF'
@@ -22,6 +28,7 @@ class ScorePanel {
 
         if (
             this.textSprite.isReady &&
+            this.recordSprite.isReady &&
             this.numbers.number0Sprite.isReady &&
             this.numbers.number1Sprite.isReady &&
             this.numbers.number2Sprite.isReady &&
@@ -34,25 +41,49 @@ class ScorePanel {
             this.numbers.number9Sprite.isReady
         )
         {
+            const panelScore = score.toString().padStart(6, '0')
+            const panelRecord = record.toString().padStart(6, '0')
+            const scoreTextY = (SCORE_PANEL_H - SCORE_PANEL_TEXT_H * 3) / 2
+            const numberY = scoreTextY + (SCORE_PANEL_TEXT_H * 2)
+            const recordTextWidth = this.recordSprite.width || SCORE_PANEL_TEXT_W
+            const recordNumbersWidth = (SCORE_PANEL_NUMBER_W + 5) * 6 - 5
+            const recordTextX = SCORE_PANEL_W - 25 - recordTextWidth
+            const recordNumbersX = SCORE_PANEL_W - 25 - recordNumbersWidth
+
             this.ctx.drawImage(
                 this.textSprite,
                 25,
-                (SCORE_PANEL_H - SCORE_PANEL_TEXT_H * 3) / 2,
+                scoreTextY,
             )
 
-            const panelScore = score.toString().padStart(6, '0')
+            this.ctx.drawImage(
+                this.recordSprite,
+                recordTextX,
+                scoreTextY,
+            )
 
-            const digits = panelScore.split('')
+            const scoreDigits = panelScore.split('')
+            const recordDigits = panelRecord.split('')
 
-                digits.forEach((digit, index) => {
-                    const sprite = this.numbers[`number${digit}Sprite`]
+            scoreDigits.forEach((digit, index) => {
+                const sprite = this.numbers[`number${digit}Sprite`]
 
-                    this.ctx.drawImage(
-                        sprite,
-                        25 + ((SCORE_PANEL_NUMBER_W + 5)* index),
-                        (SCORE_PANEL_H - SCORE_PANEL_TEXT_H * 3) / 2 + (SCORE_PANEL_TEXT_H * 2)
-                    )
-                })
+                this.ctx.drawImage(
+                    sprite,
+                    25 + ((SCORE_PANEL_NUMBER_W + 5) * index),
+                    numberY
+                )
+            })
+
+            recordDigits.forEach((digit, index) => {
+                const sprite = this.numbers[`number${digit}Sprite`]
+
+                this.ctx.drawImage(
+                    sprite,
+                    recordNumbersX + ((SCORE_PANEL_NUMBER_W + 5) * index),
+                    numberY
+                )
+            })
         }
 
     }
