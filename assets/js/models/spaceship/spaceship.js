@@ -77,7 +77,7 @@ class Spaceship {
 
         this.bullets.push(new SpaceshipBullet(
             this.ctx,
-            this.x + this.w / 2 - BULLET_W / 2,
+            this.x + this.w / 2 - SPACESHIP_BULLET_W / 2,
             this.y)
         )
     }

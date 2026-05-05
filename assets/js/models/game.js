@@ -175,7 +175,7 @@ class Game {
         /* Spaceship bullets */
 
         this.spaceship.bullets.forEach(bullet => {
-            if(bullet.y + bullet.h < SCORE_PANEL_H + BULLET_H) {
+            if(bullet.y + bullet.h < SCORE_PANEL_H + SPACESHIP_BULLET_H) {
                 this.spaceship.destroyBullet(bullet)
             }
         })
@@ -185,7 +185,7 @@ class Game {
         this.alienHorde.horde.forEach(row => {
             row.forEach(alien => {
                 alien.bullets.forEach(bullet => {
-                    if(bullet.y > CANVAS_H - LIFES_PANEL_H - BULLET_H) {
+                    if(bullet.y > CANVAS_H - LIFES_PANEL_H - ALIEN_BULLET_H) {
                         alien.destroyBullet(bullet)
                     }
                 })
@@ -222,8 +222,8 @@ class Game {
     }
 
     checkSpaceshipBulletsCollision(bullet, alien) {
-        const bulletRight = bullet.x + BULLET_W;
-        const bulletBottom = bullet.y + BULLET_H;
+        const bulletRight = bullet.x + SPACESHIP_BULLET_W;
+        const bulletBottom = bullet.y + SPACESHIP_BULLET_H;
         const alienRight = alien.x + alien.w;
         const alienBottom = alien.y + alien.h;
 
@@ -251,8 +251,8 @@ class Game {
     }
 
     checkAlienBulletCollision(bullet, spaceship) {
-        const bulletRight = bullet.x + BULLET_W;
-        const bulletBottom = bullet.y + BULLET_H;
+        const bulletRight = bullet.x + ALIEN_BULLET_W;
+        const bulletBottom = bullet.y + ALIEN_BULLET_H;
         const spaceshipRight = spaceship.x + spaceship.w;
         const spaceshipBottom = spaceship.y + spaceship.h;
 
