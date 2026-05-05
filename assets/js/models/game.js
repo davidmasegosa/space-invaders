@@ -65,8 +65,6 @@ class Game {
     }
     
     startPlaying() {
-        console.debug('Game started')
-
         this.screen = 'game'
 
         this.backgroundMusic.currentTime = 0
@@ -194,7 +192,6 @@ class Game {
                 this.alienHorde.horde.forEach(row => {
                     row.forEach(alien => {
                         if( this.checkSpaceshipBulletsCollision(bullet, alien)) {
-                            console.debug('Collision detected')
                             this.alienKilledSound.currentTime = 0
                             this.alienKilledSound.play()
                             this.alienHorde.destroyAlien(alien)
@@ -226,7 +223,6 @@ class Game {
                 alien.bullets.forEach(bullet => {
                     if (this.checkAlienBulletCollision(bullet, this.spaceship)) {
                         //
-                        console.debug('Collision detected')
                         this.spaceshipExplosionSound.currentTime = 0
                         this.spaceshipExplosionSound.play()
                         this.lifes -= 1
@@ -352,9 +348,6 @@ class Game {
         let remainingAliensCount = 0
 
         this.alienHorde.horde.forEach(row => row.forEach( al => remainingAliensCount++))
-
-        console.log('remainingAliensCount')
-        console.log(remainingAliensCount)
 
         if(remainingAliensCount <= 0) {
             this.checkRemainingHordes()
