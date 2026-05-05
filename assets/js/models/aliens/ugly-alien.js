@@ -6,9 +6,9 @@ class UglyAlien {
         this.x = x
         this.y = y
 
-        this.w = ALIEN_W
-        this.h = ALIEN_H
-        this.points = ALIEN_POINTS
+        this.w = ALIEN_UGLY_W
+        this.h = ALIEN_UGLY_H
+        this.points = ALIEN_UGLY_POINTS
 
         this.bullets = []
 

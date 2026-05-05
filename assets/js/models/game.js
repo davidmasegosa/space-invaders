@@ -148,7 +148,7 @@ class Game {
             this.alienHorde.horde.forEach(row => {
                 row.forEach(alien => {
 
-                    if(alien.x + ALIEN_W > CANVAS_W - DEFAULT_SEPARATION) {
+                    if(alien.x + ALIEN_UGLY_W > CANVAS_W - DEFAULT_SEPARATION) {
                         this.alienHorde.moveDirection = 'down'
                         window.setTimeout(() => {
                             this.alienHorde.stopMovingDownAndMoveDirection('left')

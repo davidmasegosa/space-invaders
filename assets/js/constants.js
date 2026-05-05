@@ -37,10 +37,10 @@ const SPACESHIP_VX = 5
 const BULLET_W = 6
 const BULLET_H = 12
 
-const ALIEN_W = 16
-const ALIEN_H = 16
-const ALIEN_SEPARATION = 18.5
-const ALIEN_POINTS = 10
+const ALIEN_UGLY_W = 16
+const ALIEN_UGLY_H = 16
+const ALIEN_UGLY_SEPARATION = 18.5
+const ALIEN_UGLY_POINTS = 10
 
 const ALIEN_HORRIBLE_W = 22
 const ALIEN_HORRIBLE_H = 16
