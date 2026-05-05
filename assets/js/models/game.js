@@ -12,7 +12,7 @@ class Game {
         
         this.score = 0
         this.record = 0
-        this.lifes = 3
+        this.lifes = GAME_LIFES
 
         this.fps = FPS
 
@@ -152,7 +152,7 @@ class Game {
                         this.alienHorde.moveDirection = 'down'
                         window.setTimeout(() => {
                             this.alienHorde.stopMovingDownAndMoveDirection('left')
-                        }, 3000)
+                        }, HORDE_MOVE_DOWN_TIMEOUT_TIME)
                     }
                 })
             })
@@ -166,7 +166,7 @@ class Game {
                         this.alienHorde.moveDirection = 'down'
                         window.setTimeout(() => {
                             this.alienHorde.stopMovingDownAndMoveDirection('right')
-                        }, 3000)
+                        }, HORDE_MOVE_DOWN_TIMEOUT_TIME)
                     }
                 })
             })
@@ -328,7 +328,7 @@ class Game {
         this.resetGameValues()
         this.screen = 'game-over'
         this.canRestart = false
-        setTimeout(() => this.canRestart = true, 3000)
+        setTimeout(() => this.canRestart = true, GAME_CAN_RESTART_TIMEOUT_TIME)
         this.drawGameOverScreen()
     }
 
@@ -353,7 +353,7 @@ class Game {
         )
 
         this.score = 0
-        this.lifes = 3
+        this.lifes = GAME_LIFES
 
         this.drawIntervalId = undefined
         
@@ -389,7 +389,7 @@ class Game {
         this.resetGameValues()
         this.screen = 'congratulations'
         this.canRestart = false
-        setTimeout(() => this.canRestart = true, 3000)
+        setTimeout(() => this.canRestart = true, GAME_CAN_RESTART_TIMEOUT_TIME)
         this.backgroundMusic.pause()
         this.drawCongratulationsScreen()
     }
