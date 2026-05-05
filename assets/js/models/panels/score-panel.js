@@ -23,7 +23,7 @@ class ScorePanel {
         this.ctx.lineWidth = SCORE_PANEL_STROKE_WIDTH
         this.ctx.strokeStyle = '#FFFFFF'
         this.ctx.moveTo(0, SCORE_PANEL_H - SCORE_PANEL_STROKE_WIDTH)
-        this.ctx.lineTo(600, SCORE_PANEL_H - SCORE_PANEL_STROKE_WIDTH)
+        this.ctx.lineTo(CANVAS_W, SCORE_PANEL_H - SCORE_PANEL_STROKE_WIDTH)
         this.ctx.stroke()
 
         if (
@@ -41,18 +41,18 @@ class ScorePanel {
             this.numbers.number9Sprite.isReady
         )
         {
-            const panelScore = score.toString().padStart(6, '0')
-            const panelRecord = record.toString().padStart(6, '0')
+            const panelScore = score.toString().padStart(SCORE_DIGITS, '0')
+            const panelRecord = record.toString().padStart(RECORD_DIGITS, '0')
             const scoreTextY = (SCORE_PANEL_H - SCORE_PANEL_TEXT_H * 3) / 2
             const numberY = scoreTextY + (SCORE_PANEL_TEXT_H * 2)
             const recordTextWidth = this.recordSprite.width || SCORE_PANEL_TEXT_W
-            const recordNumbersWidth = (SCORE_PANEL_NUMBER_W + 5) * 6 - 5
-            const recordTextX = SCORE_PANEL_W - 25 - recordTextWidth
-            const recordNumbersX = SCORE_PANEL_W - 25 - recordNumbersWidth
+            const recordNumbersWidth = (SCORE_PANEL_NUMBER_W + SCORE_DIGITS_SEPARATION) * RECORD_DIGITS - SCORE_DIGITS_SEPARATION
+            const recordTextX = SCORE_PANEL_W - RECORD_SEPARATION - recordTextWidth
+            const recordNumbersX = SCORE_PANEL_W - RECORD_SEPARATION - recordNumbersWidth
 
             this.ctx.drawImage(
                 this.textSprite,
-                25,
+                RECORD_SEPARATION,
                 scoreTextY,
             )
 
@@ -70,7 +70,7 @@ class ScorePanel {
 
                 this.ctx.drawImage(
                     sprite,
-                    25 + ((SCORE_PANEL_NUMBER_W + 5) * index),
+                    SCORE_SEPARATION + ((SCORE_PANEL_NUMBER_W + SCORE_DIGITS_SEPARATION) * index),
                     numberY
                 )
             })
@@ -80,7 +80,7 @@ class ScorePanel {
 
                 this.ctx.drawImage(
                     sprite,
-                    recordNumbersX + ((SCORE_PANEL_NUMBER_W + 5) * index),
+                    recordNumbersX + ((SCORE_PANEL_NUMBER_W + RECORD_DIGITS_SEPARATION) * index),
                     numberY
                 )
             })
