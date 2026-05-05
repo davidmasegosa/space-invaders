@@ -29,24 +29,24 @@ class AlienHorde {
                 if(alien === 'U') {
                     this.horde[i][j] = new UglyAlien(
                         this.ctx,
-                        DEFAULT_SEPARATION + j * (24 + DEFAULT_SEPARATION*0.75),
-                        SCORE_PANEL_H + DEFAULT_SEPARATION + i * (16 + DEFAULT_SEPARATION*0.75)
+                        DEFAULT_SEPARATION + j * (ALIEN_PLACEHOLDER_W + DEFAULT_SEPARATION*0.75),
+                        SCORE_PANEL_H + DEFAULT_SEPARATION + i * (ALIEN_PLACEHOLDER_H + DEFAULT_SEPARATION*0.75)
                     )
                 }
 
                 else if (alien === 'H') {
                     this.horde[i][j] = new HorribleAlien(
                         this.ctx,
-                        DEFAULT_SEPARATION + j * (24 + DEFAULT_SEPARATION*0.75) + 1,
-                        SCORE_PANEL_H + DEFAULT_SEPARATION + i * (16 + DEFAULT_SEPARATION*0.75)
+                        DEFAULT_SEPARATION + j * (ALIEN_PLACEHOLDER_W + DEFAULT_SEPARATION*0.75) + 1,
+                        SCORE_PANEL_H + DEFAULT_SEPARATION + i * (ALIEN_PLACEHOLDER_H + DEFAULT_SEPARATION*0.75)
                     )
                 }
 
                 else if (alien === 'R') {
                     this.horde[i][j] = new RepulsiveAlien(
                         this.ctx,
-                        DEFAULT_SEPARATION + j * (24 + DEFAULT_SEPARATION*0.75) + 4,
-                        SCORE_PANEL_H + DEFAULT_SEPARATION + i * (16 + DEFAULT_SEPARATION*0.75)
+                        DEFAULT_SEPARATION + j * (ALIEN_PLACEHOLDER_W + DEFAULT_SEPARATION*0.75) + 4,
+                        SCORE_PANEL_H + DEFAULT_SEPARATION + i * (ALIEN_PLACEHOLDER_H + DEFAULT_SEPARATION*0.75)
                     )
                 }
             }
@@ -70,18 +70,18 @@ class AlienHorde {
         if(this.moveDirection) {
 
             if(this.moveDirection === 'right') {
-                this.vx = 0.35
+                this.vx = ALIEN_HORDE_RIGHT_SPEED
                 this.vy = 0
             }
 
             else if(this.moveDirection === 'left') {
-                this.vx = -0.35
+                this.vx = ALIEN_HORDE_LEFT_SPEED
                 this.vy = 0
             }
 
             else if(this.moveDirection === 'down') {
                 this.vx = 0
-                this.vy = 0.35
+                this.vy = ALIEN_HORDE_DOWN_SPEED
             }
 
             this.horde.forEach(row => {
@@ -100,7 +100,7 @@ class AlienHorde {
     hordeAttack() {
         this.attackIntervalId = window.setInterval(() => {
             this.hordeAlienShoot()
-        }, 2000)
+        }, HORDE_ATTACK_INTERVAL_TIME)
     }
 
     hordeAlienShoot() {

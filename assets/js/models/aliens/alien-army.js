@@ -2,7 +2,7 @@ class AlienArmy {
     constructor(ctx) {
         this.ctx = ctx
 
-        this.remainingHordes = 3
+        this.remainingHordes = ALIEN_ARMY_TOTAL_HORDES
 
         this.firstHordeDefinition = [
             ['R','R','R','R','R','R','R','R','R','R','R'],
