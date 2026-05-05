@@ -48,7 +48,7 @@ class Spaceship {
                     
                     window.setTimeout(() => {
                         this.bulletWaitActive = false
-                    }, 250)
+                    }, SPACESHIP_SHOOT_WAIT_TIME)
                     
                     this.shoot()
                 }

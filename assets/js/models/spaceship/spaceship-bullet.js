@@ -6,10 +6,10 @@ class SpaceshipBullet {
         this.x = x
         this.y = y
 
-        this.w = BULLET_W
-        this.h = BULLET_H
+        this.w = SPACESHIP_BULLET_W
+        this.h = SPACESHIP_BULLET_H
 
-        this.vy = -4
+        this.vy = SPACESHIP_BULLET_SPEED
 
         this.sprite = new Image()
         this.sprite.src = './assets/images/sprites/sprite-bullet.png'
